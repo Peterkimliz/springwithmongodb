@@ -1,0 +1,6 @@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://peterkimani:kimani89@cluster0.l6ma0.mongodb.net/springStore
+      database: springStore
