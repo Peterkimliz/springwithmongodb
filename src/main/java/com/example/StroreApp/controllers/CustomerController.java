@@ -18,12 +18,6 @@ import java.util.Optional;
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
-
-    @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody @Validated CustomerDto customerDto) {
-        return new ResponseEntity<Customer>(customerService.createCustomer(customerDto), HttpStatus.CREATED);
-    }
-
     @GetMapping
     public ResponseEntity<List<Customer>> getCustomers() {
         List<Customer> customers = customerService.getCustomer();
@@ -34,6 +28,12 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") String id) {
         return new ResponseEntity<Customer>(customerService.getCustomerById(id), HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Customer> updateCustomerById(@PathVariable("id") String id, @RequestBody Customer customer) {
+        return new ResponseEntity<Customer>(customerService.updateCustomer(id, customer), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomerById(@PathVariable("id") String id) {
         customerService.deleteCustomer(id);

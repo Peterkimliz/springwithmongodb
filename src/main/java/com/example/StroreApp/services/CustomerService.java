@@ -6,6 +6,7 @@ import com.example.StroreApp.Exceptions.ResourceExistException;
 import com.example.StroreApp.Repository.CustomerRepository;
 import com.example.StroreApp.models.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class CustomerService {
     }
 
     public List<Customer> getCustomer() {
-        List<Customer> customers = customerRepository.findAll();
+        List<Customer> customers = customerRepository.findAll(Sort.by(Sort.Direction.DESC,"createdAt"));
         if (customers.size() == 0) {
             return new ArrayList<>();
         } else {
@@ -65,14 +66,16 @@ public class CustomerService {
         }
     }
 
-    public void updatePassword(String email, String password) {
-        Optional<Customer> foundCustomer = customerRepository.findByEmail(email);
+    public Customer updateCustomer(String id, Customer customer) {
+        Optional<Customer> foundCustomer = customerRepository.findById(id);
         if (!foundCustomer.isPresent()) {
             throw new NotFoundResource("Customer with email doesnot exist");
         } else {
-            Customer customer = new Customer();
-            customer.setUpdatedAt(new Date(System.currentTimeMillis()));
-            customer.setPassword(passwordEncoder.encode(password));
+            Customer saveCustomer = foundCustomer.get();
+            saveCustomer.setUpdatedAt(new Date(System.currentTimeMillis()));
+            saveCustomer.setName(customer.getName()==null? saveCustomer.getName():customer.getName());
+            saveCustomer.setPhone(customer.getPhone()==null? saveCustomer.getPhone():customer.getPhone());
+           return customerRepository.save(saveCustomer);
         }
     }
 
