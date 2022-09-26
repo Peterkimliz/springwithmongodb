@@ -1,6 +1,5 @@
 package com.example.StroreApp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,17 +11,16 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("Customer")
-public class Customer {
+@Document(collection = "shop")
+public class Shop {
     @Id
     private String id;
     private String name;
-    private String email;
-    private String phone;
-    @JsonIgnore
-    private String password;
+    private String location;
+    private String image;
+    private Seller seller;
     private Date createdAt;
     private Date updatedAt;
-    private String type;
+    private boolean activated = false;
 
 }

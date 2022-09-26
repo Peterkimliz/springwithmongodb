@@ -10,10 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Document("Customer")
-public class Customer {
+@NoArgsConstructor
+@Document(collection = "seller")
+public class Seller {
     @Id
     private String id;
     private String name;

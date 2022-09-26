@@ -8,21 +8,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
+@Document(collection = "product")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Document("Customer")
-public class Customer {
+@NoArgsConstructor
+public class Product {
     @Id
     private String id;
     private String name;
-    private String email;
-    private String phone;
-    @JsonIgnore
-    private String password;
+    private String description;
+    private  Shop shop;
+    private List<String> imageUrl;
+    private int price;
+    private int quantity;
     private Date createdAt;
     private Date updatedAt;
-    private String type;
+    private boolean deleted=false;
+
+
+
 
 }

@@ -32,6 +32,7 @@ public class CustomerService {
             customer.setUpdatedAt(new Date(System.currentTimeMillis()));
             customer.setName(customerDto.getName());
             customer.setEmail(customerDto.getEmail());
+            customer.setType("customer");
             customer.setPhone(customerDto.getPhone());
             customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
             return customerRepository.save(customer);
