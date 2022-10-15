@@ -1,4 +1,4 @@
-package com.example.StroreApp.services;
+package com.example.StroreApp.security;
 
 import com.example.StroreApp.Exceptions.NotFoundResource;
 import com.example.StroreApp.Repository.CustomerRepository;
@@ -19,8 +19,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Customer> customer=customerRepository.findByEmail(email);
-        if(!customer.isPresent()){
-            throw new NotFoundResource("user with email address doesnot exist");
+        if(customer.isEmpty()){
+            throw new UsernameNotFoundException("user with email address doesnot exist");
         }else{
             return  new User(customer.get().getEmail(),customer.get().getPassword(),new ArrayList<>());
         }

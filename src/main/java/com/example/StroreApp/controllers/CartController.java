@@ -28,4 +28,14 @@ public class CartController {
     public ResponseEntity<CartItemsDto> getUserCart(@PathVariable("id") String id) {
         return new ResponseEntity<CartItemsDto>(cartService.getCartByUserId(id), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUserCart(@PathVariable("id") String id) {
+        cartService.deleteCart(id);
+        return new ResponseEntity<>("cart deleted successfully", HttpStatus.OK);
+    } @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteEntireCart(@PathVariable("id") String id) {
+        cartService.deleteEntireCart(id);
+        return new ResponseEntity<>("cart deleted successfully", HttpStatus.OK);
+    }
 }

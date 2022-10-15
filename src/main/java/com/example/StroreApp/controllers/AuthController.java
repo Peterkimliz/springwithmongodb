@@ -26,8 +26,19 @@ public class AuthController {
     public ResponseEntity<Customer> createCustomer(@RequestBody @Validated CustomerDto customerDto) {
         return new ResponseEntity<Customer>(customerService.createCustomer(customerDto), HttpStatus.CREATED);
     }
+    @PostMapping("/customer/signin")
+    public ResponseEntity<Customer> loginCustomer(@RequestBody @Validated CustomerDto customerDto) {
+        return new ResponseEntity<Customer>(customerService.createCustomer(customerDto), HttpStatus.CREATED);
+    }
+
+
     @PostMapping("/seller")
     public ResponseEntity<Seller> createSeller(@RequestBody @Validated SellerDto sellerDto) {
+        return new ResponseEntity<Seller>(sellerService.createSeller(sellerDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/seller")
+    public ResponseEntity<Seller> loginSeller(@RequestBody @Validated SellerDto sellerDto) {
         return new ResponseEntity<Seller>(sellerService.createSeller(sellerDto), HttpStatus.CREATED);
     }
 

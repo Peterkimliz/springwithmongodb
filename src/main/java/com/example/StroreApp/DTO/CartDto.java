@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class CartDto {
 @NotBlank(message = "please enter product id")
-    private String productId;
+    private String productid;
     @NotBlank(message = "please enter quantity")
     private String quantity;
 

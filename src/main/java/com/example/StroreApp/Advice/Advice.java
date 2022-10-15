@@ -5,6 +5,7 @@ import com.example.StroreApp.Exceptions.NotFoundResource;
 import com.example.StroreApp.Exceptions.ResourceExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,6 +28,12 @@ public class Advice {
  }
  @ExceptionHandler( NotFoundResource.class)
     public ResponseEntity< ExceptionObject> resourceNotFound(NotFoundResource e){
+     ExceptionObject exceptionObject=new ExceptionObject();
+     exceptionObject.setMessage(e.getMessage());
+     return new ResponseEntity<>(exceptionObject,HttpStatus.NOT_FOUND);
+ }
+ @ExceptionHandler( UsernameNotFoundException.class)
+    public ResponseEntity< ExceptionObject> usernameNotFound(UsernameNotFoundException e){
      ExceptionObject exceptionObject=new ExceptionObject();
      exceptionObject.setMessage(e.getMessage());
      return new ResponseEntity<>(exceptionObject,HttpStatus.NOT_FOUND);

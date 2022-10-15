@@ -18,4 +18,5 @@ public class CustomerDto {
     private String phone;
     @NotBlank(message = "please enter your password")
     private String password;
+
 }
